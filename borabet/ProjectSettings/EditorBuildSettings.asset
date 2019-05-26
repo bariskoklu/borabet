@@ -4,5 +4,20 @@
 EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
-  m_Scenes: []
+  m_Scenes:
+  - enabled: 1
+    path: Assets/Scenes/Bina1.unity
+    guid: ddd132dfa0652414993e02b9ef3ef437
+  - enabled: 1
+    path: Assets/Scenes/Bina2.unity
+    guid: c4c3b2998d763e2489b269b8d35f8d40
+  - enabled: 1
+    path: Assets/Scenes/Bina3.unity
+    guid: c90e103240d1c4c41a438fe9a46ad72b
+  - enabled: 1
+    path: "Assets/Scenes/Giri\u015FEkran\u0131.unity"
+    guid: 71abca49f2737ea48b022ca7d8a03ecc
+  - enabled: 1
+    path: Assets/Scenes/Login-Register.unity
+    guid: 24027c77533384d4995d0c428f2392bd
   m_configObjects: {}
