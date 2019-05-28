@@ -30,26 +30,26 @@ MonoBehaviour:
     m_Settings:
       excludeSkybox: 1
   antialiasing:
-    m_Enabled: 0
+    m_Enabled: 1
     m_Settings:
       method: 0
       fxaaSettings:
-        preset: 4
+        preset: 2
       taaSettings:
         jitterSpread: 0.75
         sharpen: 0.3
         stationaryBlending: 0.95
         motionBlending: 0.85
   ambientOcclusion:
-    m_Enabled: 0
+    m_Enabled: 1
     m_Settings:
-      intensity: 1
-      radius: 0.3
+      intensity: 0.1
+      radius: 3.6
       sampleCount: 10
-      downsampling: 1
+      downsampling: 0
       forceForwardCompatibility: 0
       ambientOnly: 0
-      highPrecision: 0
+      highPrecision: 1
   screenSpaceReflection:
     m_Enabled: 0
     m_Settings:
@@ -72,11 +72,11 @@ MonoBehaviour:
   depthOfField:
     m_Enabled: 1
     m_Settings:
-      focusDistance: 0.1
-      aperture: 20.8
-      focalLength: 6
+      focusDistance: 1.71
+      aperture: 1.06
+      focalLength: 57
       useCameraFov: 0
-      kernelSize: 3
+      kernelSize: 1
   motionBlur:
     m_Enabled: 0
     m_Settings:
@@ -318,14 +318,14 @@ MonoBehaviour:
       size: 1
       luminanceContribution: 0.8
   vignette:
-    m_Enabled: 0
+    m_Enabled: 1
     m_Settings:
       mode: 0
-      color: {r: 0, g: 0, b: 0, a: 1}
+      color: {r: 0.09433961, g: 0.09433961, b: 0.09433961, a: 1}
       center: {x: 0.5, y: 0.5}
-      intensity: 0.45
-      smoothness: 0.2
-      roundness: 1
+      intensity: 0.462
+      smoothness: 0.23
+      roundness: 0.866
       mask: {fileID: 0}
       opacity: 1
       rounded: 0
@@ -341,5 +341,5 @@ MonoBehaviour:
     waveformG: 1
     waveformB: 1
     paradeExposure: 0.12
-    vectorscopeExposure: 0.12
+    vectorscopeExposure: 0.11666667
     vectorscopeShowBackground: 1
