@@ -5,9 +5,16 @@ using UnityEngine.SceneManagement;
 
 public class ButtonController : MonoBehaviour
 {
-    public void ChangeScene(string sceneToGo)
+    public int buildingNumber = 3;
+    public void ChangeScene()
     {
-
-        SceneManager.LoadScene(sceneToGo);
+        if (SceneManager.GetActiveScene().buildIndex + 1 < buildingNumber)
+        {
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+        }
+        else
+        {
+            SceneManager.LoadScene(0);
+        }
     }
 }
