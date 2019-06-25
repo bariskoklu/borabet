@@ -8,18 +8,21 @@ public class RandomNumberGenerator : MonoBehaviour
     private int pointGenerated = 0;
     private int maxRange = 1000;//Alınabilicek en fazla puan
     private int minRange = 300;//Alınabilicek en düşük puan
-    public GameObject pointText;
+    public GameObject buildingPointText;
+    public GameObject totalPointText;
 
     void Start()
     {
-        pointText.GetComponent<Text>().text = PointHolderStatic.currentPoint.ToString();
+        PointHolderStatic.currentBuildingPoint = 0;
+        totalPointText.GetComponent<Text>().text = PointHolderStatic.totalPoint.ToString();
+        buildingPointText.GetComponent<Text>().text = PointHolderStatic.currentBuildingPoint.ToString();
     }
 
 
     public void GeneratePoint()
     {
         pointGenerated = Random.Range(minRange, maxRange);
-        PointHolderStatic.currentPoint += pointGenerated;
-        pointText.GetComponent<Text>().text = PointHolderStatic.currentPoint.ToString();
+        PointHolderStatic.currentBuildingPoint = pointGenerated;
+        buildingPointText.GetComponent<Text>().text = PointHolderStatic.currentBuildingPoint.ToString();
     }
 }

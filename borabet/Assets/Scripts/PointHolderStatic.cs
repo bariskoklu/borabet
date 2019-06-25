@@ -4,5 +4,6 @@ using UnityEngine;
 
 public static class PointHolderStatic
 {
-    public static int currentPoint;
+    public static int totalPoint = 0;
+    public static int currentBuildingPoint = 0;
 }
