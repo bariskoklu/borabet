@@ -4,15 +4,18 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.Advertisements;
 
-public class ButtonController : MonoBehaviour, IUnityAdsListener
+public class ButtonController : MonoBehaviour
 {
     public int buildingNumber = 3;
+    public GameObject Canvas;
+    public GameObject PopUp;
+    public int currentBuildingNumber;
     string gameId = "3199971";
     bool testMode = true;
     private void Start()
     {
-        Advertisement.AddListener(this);
         Advertisement.Initialize(gameId, testMode);
+
     }
 
     public void ChangeScene()
@@ -22,58 +25,53 @@ public class ButtonController : MonoBehaviour, IUnityAdsListener
             Debug.Log("hey");
             Advertisement.Show("LevelChange");
         }*/
+        //Debug.Log("ses");
+        Canvas.SetActive(false);
+        gameObject.GetComponent<Camera>().backgroundColor = new Color(0,0,0,0.2f);
+        PopUp.SetActive(true);
+        //popupdan devam edilecek. Yeni fonksiyon yazılacak popup'ın çağırdığı
 
-        if (SceneManager.GetActiveScene().buildIndex + 1 < buildingNumber)
+
+        currentBuildingNumber = SceneManager.GetActiveScene().buildIndex;
+
+        if (currentBuildingNumber + 1 < buildingNumber)
         {
-            if (Advertisement.IsReady("rewardedVideo"))
-            {
-                Advertisement.Show("rewardedVideo");
-            }
+            Debug.Log(PointHolderStatic.currentBuildingPoint);
+            ShowRewardedVideo();
         }
         else
         {
-            if (Advertisement.IsReady("LevelChange"))
-            {
-                Advertisement.Show("LevelChange");
-            }
-        }
-    }
-
-    public void OnUnityAdsReady(string placementId)
-    {
-        
-    }
-
-    public void OnUnityAdsDidError(string message)
-    {
-        
-    }
-
-    public void OnUnityAdsDidStart(string placementId)
-    {
-        
-    }
-
-    public void OnUnityAdsDidFinish(string placementId, ShowResult showResult)
-    {
-        if (showResult == ShowResult.Finished && placementId == "rewardedVideo")
-        {
-            Debug.Log("Puanın ikiye katlandı");
-            PointHolderStatic.currentBuildingPoint *= 2;
-            PointHolderStatic.totalPoint += PointHolderStatic.currentBuildingPoint;
-            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
-        }
-        else if (showResult == ShowResult.Skipped && placementId == "rewardedVideo")
-        {
-            Debug.Log("Videoyu bitirmediğinden dolayı puanın ikiye katlanmadı");
-        }
-        else if (showResult == ShowResult.Finished && placementId == "LevelChange")
-        {
+            Advertisement.Show("LevelChange");
             SceneManager.LoadScene(0);
         }
-        else if (showResult == ShowResult.Failed)
+    }
+
+    void ShowRewardedVideo()
+    {
+        ShowOptions options = new ShowOptions();
+        options.resultCallback = HandleShowResult;
+
+        Advertisement.Show("rewardedVideo", options);
+    }
+
+    void HandleShowResult(ShowResult result)
+    {
+        if (result == ShowResult.Finished)
         {
-            Debug.LogWarning("The ad did not finish due to an error.");
+            Debug.Log("Video completed - Offer a reward to the player");
+            PointHolderStatic.currentBuildingPoint *= 2;
+            PointHolderStatic.totalPoint += PointHolderStatic.currentBuildingPoint;
+            SceneManager.LoadScene(currentBuildingNumber + 1);
+
+        }
+        else if (result == ShowResult.Skipped)
+        {
+            Debug.LogWarning("Video was skipped - Do NOT reward the player");
+
+        }
+        else if (result == ShowResult.Failed)
+        {
+            Debug.LogError("Video failed to show");
         }
     }
 }
