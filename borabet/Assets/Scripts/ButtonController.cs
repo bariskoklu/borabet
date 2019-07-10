@@ -28,16 +28,52 @@ public class ButtonController : MonoBehaviour
         //Debug.Log("ses");
         Canvas.SetActive(false);
         gameObject.GetComponent<Camera>().backgroundColor = new Color(0,0,0,0.2f);
-        PopUp.SetActive(true);
+        currentBuildingNumber = SceneManager.GetActiveScene().buildIndex;
+        if (currentBuildingNumber + 1 >= buildingNumber)
+        {
+            Advertisement.Show("LevelChange");
+            SceneManager.LoadScene(0);
+        }
+        else
+        {
+            PopUp.SetActive(true);
+        }
         //popupdan devam edilecek. Yeni fonksiyon yazılacak popup'ın çağırdığı
 
 
-        currentBuildingNumber = SceneManager.GetActiveScene().buildIndex;
 
+        /*if (currentBuildingNumber + 1 < buildingNumber)
+        {
+            Debug.Log(PointHolderStatic.currentBuildingPoint);
+            ShowRewardedVideo();
+        }
+        else
+        {
+            Advertisement.Show("LevelChange");
+            SceneManager.LoadScene(0);
+        }*/
+    }
+
+    public void WatchRewardedVideo()
+    {
         if (currentBuildingNumber + 1 < buildingNumber)
         {
             Debug.Log(PointHolderStatic.currentBuildingPoint);
             ShowRewardedVideo();
+        }
+        else
+        {
+            Advertisement.Show("LevelChange");
+            SceneManager.LoadScene(0);
+        }
+    }
+
+    public void SkipRewardedVideo()
+    {
+        if (currentBuildingNumber + 1 < buildingNumber)
+        {
+            Debug.Log(PointHolderStatic.currentBuildingPoint);
+            SceneManager.LoadScene(currentBuildingNumber + 1);
         }
         else
         {
@@ -62,7 +98,6 @@ public class ButtonController : MonoBehaviour
             PointHolderStatic.currentBuildingPoint *= 2;
             PointHolderStatic.totalPoint += PointHolderStatic.currentBuildingPoint;
             SceneManager.LoadScene(currentBuildingNumber + 1);
-
         }
         else if (result == ShowResult.Skipped)
         {
